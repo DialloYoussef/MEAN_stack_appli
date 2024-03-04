@@ -1,0 +1,65 @@
+
+  <div class="mt-5 container">
+      <div class="row">
+        <!-- Formulaire -->
+          <div class="col-md-4 " >
+              <form [formGroup]="myForm" (ngSubmit)="enregistrer()">
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Prenom</label>
+                    <input type="text" class="form-control" formControlName="firstname" >
+
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Nom</label>
+                    <input type="text" class="form-control" formControlName="lastname" >
+
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputtext1" class="form-label">Matricule</label>
+                    <input type="text" class="form-control" formControlName="matricule">
+
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputtext1" class="form-label">Département</label>
+                    <select name="" class="form-select form-select-sm" id="" formControlName="departement">
+                          <option *ngFor="let  dept of departements " value="{{dept._id}}">{{dept.name}}</option>
+                    </select>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">
+                    {{ isCreationMode ? 'Enregistrer' : 'Modifier' }}
+                  </button>
+             </form>
+          </div>
+
+          <!-- LISTE -->
+          <div class="col-md-8">
+              <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="bg-success text-light" scope="col">#</th>
+                      <th class="bg-success text-light" scope="col">Prenom</th>
+                      <th class="bg-success text-light" scope="col">Nom</th>
+                      <th class="bg-success text-light" scope="col">Matricule</th>
+                      <th class="bg-success text-light" scope="col">Département</th>
+                      <th class="bg-success justify-content-end d-flex text-light" scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let etudiant of etudiants">
+                      <th class="fs-6 fw-light" scope="row">{{etudiant._id}}</th>
+                      <td class="fs-6 fw-light">{{etudiant.firstname}}</td>
+                      <td class="fs-6 fw-light">{{etudiant.lastname}}</td>
+                      <td class="fs-6 fw-light">{{etudiant.matricule}}</td>
+                      <td class="fs-6 fw-light">{{etudiant.departement.name}}</td>
+                      <td class="fs-6 fw-light d-flex justify-content-around">
+                        <button class="btn btn-sm btn-warning " (click)="modifierEtudiant(etudiant)">Modifier</button>
+                        <button class="btn btn-sm btn-danger" (click)="supprimerEtudiant(etudiant._id)">Supprimer</button>
+                    </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+          </div>
+      </div>
+  </div>
